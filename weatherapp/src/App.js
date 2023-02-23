@@ -7,7 +7,7 @@ import { getFormattedWeatherData } from "./assets/weatherService";
 function App() {
   const [city, setCity] = useState("Paris");
   const [weather, setWeather] = useState(null);
-  const [units, setUnits] = useSate("metric");
+  const [units, setUnits] = useState("metric");
   const [bg, setBg] = useState(hot);
 
   useEffect(() => {
