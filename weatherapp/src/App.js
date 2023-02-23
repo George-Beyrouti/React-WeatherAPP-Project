@@ -1,46 +1,79 @@
 import hot from "./assets/hot.jpg";
 import cold from "./assets/cold.jpeg";
 import Descriptions from "./components/Descriptions";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getFormattedWeatherData } from "./assets/weatherService";
 
 function App() {
+  const [city, setCity] = useState("Paris");
+  const [weather, setWeather] = useState(null);
+  const [units, setUnits] = useSate("metric");
+  const [bg, setBg] = useState(hot);
+
   useEffect(() => {
     const fetchWeatherData = async () => {
-      const data = await getFormattedWeatherData("paris");
+      const data = await getFormattedWeatherData(city, units);
+      setWeather(data);
+
+      //dynamischer bg
+      const treshold = units === "metric" ? 20 : 60;
+      if (data.temp <= treshold) setBg(cold);
+      else setBg(hot);
     };
 
     fetchWeatherData();
-  }, []);
+  }, [units, city]);
+
+  const handleUnitsClick = (e) => {
+    const button = e.currentTarget;
+    const currentUnit = button.innerText.slice(1);
+
+    const isCelsius = currentUnit === "C";
+    button.innerText = isCelsius ? "°F" : "°C";
+    setUnits(isCelsius ? "metric" : "imperial");
+  };
+
+  const enterKeyPressed = (e) => {
+    if (e.keyCode === 13) {
+      setCity(e.currentTarget.value);
+      e.currentTarget.blur();
+    }
+  };
 
   return (
-    <div className="app" style={{ backgroundImage: `url(${cold})` }}>
+    <div className="app" style={{ backgroundImage: `url(${bg})` }}>
       <div className="overlay">
-        <div className="container">
-          <div className="section sectionInputs">
-            <input type="text" name="city" placeholder="Enter City..." />
-            <button>°F</button>
-          </div>
-          {/* icondiv */}
-          <div className="section sectionTemperature">
-            <div className="icon">
-              <h3>London, GB</h3>
-              <img
-                src="https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather02-512.png"
-                alt="weatherIcon"
+        {weather && (
+          <div className="container">
+            <div className="section sectionInputs">
+              <input
+                onKeyDown={enterKeyPressed}
+                type="text"
+                name="city"
+                placeholder="Enter City..."
               />
-              <h3>cloudy</h3>
+              <button onClick={(e) => handleUnitsClick(e)}>°F</button>
             </div>
-            {/* temperatur div */}
-            <div className="temperature">
-              <h1>17 °C</h1>
+            {/* icondiv */}
+            <div className="section sectionTemperature">
+              <div className="icon">
+                <h3>{`${weather.name}, ${weather.country}`}</h3>
+                <img src={weather.iconURL} alt="weatherIcon" />
+                <h3>{weather.description}</h3>
+              </div>
+              {/* temperatur div */}
+              <div className="temperature">
+                <h1>{`${weather.temp.toFixed()} °${
+                  units === "metric" ? "C" : "F"
+                }`}</h1>
+              </div>
             </div>
+
+            {/* bottom description */}
+
+            <Descriptions weather={weather} units={units} />
           </div>
-
-          {/* bottom description */}
-
-          <Descriptions />
-        </div>
+        )}
       </div>
     </div>
   );
