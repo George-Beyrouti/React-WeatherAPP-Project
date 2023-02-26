@@ -1,5 +1,5 @@
 :root {
-  --secrion-overlay: rgba(0, 0, 0, 0.7);
+  --section-overlay: rgba(0, 0, 0, 0.7);
   --background-overlay: rgba(0, 0, 0, 0, 0.2);
 }
 
@@ -49,7 +49,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: var(--secrion-overlay);
+  background-color: var(--section-overlay);
 }
 
 .sectionInputs > input {
