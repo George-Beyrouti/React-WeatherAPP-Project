@@ -10,6 +10,33 @@ function App() {
   const [units, setUnits] = useState("metric");
   const [bg, setBg] = useState(hot);
 
+  const cities = [
+    {
+      id: 1,
+      title: "Berlin",
+    },
+    {
+      id: 2,
+      title: "Paris",
+    },
+    {
+      id: 3,
+      title: "London",
+    },
+    {
+      id: 4,
+      title: "New York",
+    },
+    {
+      id: 5,
+      title: "Los Angeles",
+    },
+    {
+      id: 6,
+      title: "Beijing",
+    },
+  ];
+
   useEffect(() => {
     const fetchWeatherData = async () => {
       const data = await getFormattedWeatherData(city, units);
@@ -45,14 +72,30 @@ function App() {
       <div className="overlay">
         {weather && (
           <div className="container">
-            <div className="section sectionInputs">
+            <div className="towns">
+              {cities.map((city) => (
+                <button
+                  key={city.id}
+                  className="townNames"
+                  onClick={() => setCity(city.title)}
+                >
+                  {city.title}
+                </button>
+              ))}
+            </div>
+            <div className="section sectionInputs btnContainer">
               <input
                 onKeyDown={enterKeyPressed}
                 type="text"
                 name="city"
                 placeholder="Enter City..."
               />
-              <button onClick={(e) => handleUnitsClick(e)}>°F</button>
+              <button
+                className="btnButton"
+                onClick={(e) => handleUnitsClick(e)}
+              >
+                °F
+              </button>
             </div>
             {/* icondiv */}
             <div className="section sectionTemperature">

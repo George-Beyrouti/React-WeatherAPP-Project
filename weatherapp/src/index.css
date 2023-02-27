@@ -44,12 +44,28 @@
   color: white;
 }
 
+.towns {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 2.5rem;
+  margin-bottom: 10px;
+  background-color: var(--section-overlay);
+  color: white;
+  padding: 1rem;
+  border-radius: 0.4rem;
+}
+
 .sectionInputs,
 .sectionTemperature {
   display: flex;
   align-items: center;
   justify-content: space-between;
   background-color: var(--section-overlay);
+}
+
+.sectionTemperature {
+  margin-top: 20px;
 }
 
 .sectionInputs > input {
@@ -95,4 +111,37 @@
 
 .temperature > h1 {
   font-size: 60px;
+}
+
+@media screen and (max-width: 1024px) {
+  .btnContainer {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+@media screen and (max-width: 600px) {
+  .btnContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .btnButton {
+    display: flex;
+    flex-direction: column;
+  }
+  .towns {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media screen and (max-width: 477px) {
+  .btnButton {
+    margin-top: 10px;
+  }
+  .btnContainer {
+    margin-bottom: 20px;
+  }
+  .towns {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
