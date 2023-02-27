@@ -9,7 +9,7 @@ const getFormattedWeatherData = async (city, unit = "metric") => {
   const data = await fetch(URL)
     .then((res) => res.json())
     .then((data) => data);
-
+    console.log("hallo");
   const {
     weather,
     main: { temp, feels_like, temp_min, temp_max, pressure, humidity },
