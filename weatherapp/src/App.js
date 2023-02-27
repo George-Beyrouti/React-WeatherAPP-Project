@@ -106,9 +106,8 @@ function App() {
               </div>
               {/* temperatur div */}
               <div className="temperature">
-                <h1>{`${weather.temp.toFixed()} °${
-                  units === "metric" ? "C" : "F"
-                }`}</h1>
+                <h1>{`${weather.temp.toFixed()} °${units === "metric" ? "C" : "F"
+                  }`}</h1>
               </div>
             </div>
 

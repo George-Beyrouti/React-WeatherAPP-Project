@@ -19,7 +19,7 @@
 
 .overlay {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background-color: var(--background-overlay);
 }
 
@@ -54,6 +54,15 @@
   color: white;
   padding: 1rem;
   border-radius: 0.4rem;
+}
+
+.townNames {
+  padding: 5px 5px;
+  border: none;
+  border-radius: 00.4rem;
+  font-size: 16px;
+  font-weight: 500;
+  background-color: white;
 }
 
 .sectionInputs,
