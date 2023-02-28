@@ -128,7 +128,7 @@
     flex-wrap: wrap;
   }
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 650px) {
   .btnContainer {
     display: flex;
     flex-wrap: wrap;
@@ -140,7 +140,8 @@
     flex-direction: column;
   }
   .towns {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 1.5rem;
   }
 }
 @media screen and (max-width: 477px) {
